@@ -1,6 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
+import random
+from datetime import datetime
+
 
 def main():
     print("------------------------------------------------------------------------")
@@ -15,6 +18,15 @@ def main():
         show_example()
 
     while True:
+        # Check if the microservice was called, handle if necessary
+        if check_txt_file_contents("rng_pipe.txt", "request"):
+            # Get a RNG
+            num = rng_generator()
+
+            # write the rng over
+            write_to_txt_file("rng_pipe.txt", str(num))
+
+        # Do the normal loop
         response = get_input_from_user()
 
         if response == "exit" or response == "q":
@@ -65,11 +77,6 @@ def get_input_from_user():
     return converted_wiki_topic
 
 
-def scrape_wiki_page():
-    # Todo
-    pass
-
-
 def check_wiki_page_exists(page_source):
     # Check if the page exists
     if "Wikipedia does not have an article with this exact name." in page_source:
@@ -99,6 +106,40 @@ def show_example():
         print("\n")
 
     driver.quit()
+
+
+def rng_generator():
+    """Returns a psuedo random number between 1-5. uses the current datetime to ensure it is random on each call"""
+    current_time = datetime.now()
+    seed = int(current_time.timestamp())
+    random.seed(seed)
+    return random.randrange(1, 6, 1)
+
+
+def check_txt_file_contents(file_path, str_to_check):
+    try:
+        with open(file_path, 'r') as file:
+            file_content = file.read()
+
+            if file_content.strip() == str_to_check:
+                return True
+            else:
+                return False
+    except FileNotFoundError:
+        print(f"File not found: {file_path}")
+        return False
+    except Exception as e:
+        print(f"Error occurred: {e}")
+        return False
+
+
+def write_to_txt_file(file_path, str_to_write):
+    try:
+        with open(file_path, 'w') as file:
+            file.write(str_to_write)
+        print("File written successfully.")
+    except Exception as e:
+        print(f"Error occurred while writing to the file: {e}")
 
 
 if __name__ == "__main__":
