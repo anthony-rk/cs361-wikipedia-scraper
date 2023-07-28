@@ -61,3 +61,6 @@ def check_txt_file_contents(file_path, str_to_check):
         print(f"Error occurred: {e}")
         return False
 ```
+
+
+![UML Diagram](UML_Sequence_Diagram.png)
