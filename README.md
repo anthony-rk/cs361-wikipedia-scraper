@@ -62,5 +62,5 @@ def check_txt_file_contents(file_path, str_to_check):
         return False
 ```
 
-
+### UML Diagram of the Communication Pipe
 ![UML Diagram](UML_Sequence_Diagram.png)
