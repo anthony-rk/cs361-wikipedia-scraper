@@ -3,7 +3,7 @@
 ## Microservice Instructions
 The microservice that is implemented is a psuedo random number generator that produces an integer from 1 to 5, inclusive of both ends. 
 
-In order to programatically request data, there is a txt file called rng_pipe.txt. While my program is running, simply write "request" into that file, and on the next loop of my program where it asks for a wiki topic it will see that and overrite the file with the random number. At this point you can read from the file, and as long as it is not empty or filled with just "request", you should be able to grab the int from it.
+In order to programatically request data, there is a txt file called rng_pipe.txt. While the rng_microservice.py program is running, simply write "request" into that file, and on the next read check see that a request has been submitted and it will generate a rng and overrite the file with that random number. At this point you can read from the file, and as long as it is not empty or filled with just "request", you should be able to grab the int from it.
 
 ## Example Request Call
 
