@@ -18,15 +18,6 @@ def main():
         show_example()
 
     while True:
-        # Check if the microservice was called, handle if necessary
-        if check_txt_file_contents("rng_pipe.txt", "request"):
-            # Get a RNG
-            num = rng_generator()
-
-            # write the rng over
-            write_to_txt_file("rng_pipe.txt", str(num))
-
-        # Do the normal loop
         response = get_input_from_user()
 
         if response == "exit" or response == "q":
